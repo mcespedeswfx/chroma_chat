@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Interface</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #chat-container {
+            width: 400px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        #chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        #chat-messages p {
+            margin: 0 0 10px 0; /* Add space between sentences */
+        }
+
+        #chat-messages .question {
+            background-color: #f7f7f7;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        #chat-messages .response {
+            background-color: #e5f1e7; /* Different background color for the response */
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 10px; /* Add space between question and response */
+        }
+
+        #user-input {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        #user-input textarea {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            resize: none;
+            font-size: 14px;
+            outline: none;
+            background-color: #f7f7f7;
+            transition: box-shadow 0.3s;
+        }
+
+        #user-input textarea:focus {
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        #user-input button {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #user-input button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="chat-container">
+        <div id="chat-messages">
+            {% if data %}
+                <p class="question"><strong>Pregunta:</strong> {{ data }}</p>
+            {% endif %}
+
+            {% if response %}
+                <p class="response"><strong>Respuesta:</strong> {{ response }}</p>
+            {% endif %}
+        </div>
+
+        <div id="user-input">
+            <form id="chat-form" action="/" method="post" style="width: 100%;">
+                <textarea id="data" name="data" rows="4" placeholder="Ingrese un mensaje..." style="margin-right: 10px;"></textarea>
+                <button type="button" onclick="sendMessage()">Enviar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            document.getElementById('chat-form').submit();
+        }
+    </script>
+</body>
+</html>
